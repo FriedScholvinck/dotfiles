@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Set the directory of the script as the working directory
+cd "$(dirname "$0")"
+
+# Define an array of configurations
+configs=(
+  "nvim:$HOME/.config/nvim"
+  "alacritty:$HOME/.config/alacritty"
+  "tmux.conf:$HOME/tmux.conf"
+  "starship.toml:$HOME/.config/starship.toml"
+  ".bash_profile:$HOME/.bash_profile"
+  ".profile:$HOME/.profile"
+)
+
+# Install all or specific configurations
+install_configs() {
+  for config in "${configs[@]}"; do
+    IFS=":" read -r src dest <<<"$config"
+    if [[ $# -eq 0 || " $* " =~ " $src " ]]; then
+      echo "Installing $src"
+      mkdir -p "$(dirname "$dest")"
+      rm -rf "$dest"
+      ln -sf "$(pwd)/$src" "$dest"
+    fi
+  done
+}
+
+# Run the installation
+if [ $# -eq 0 ]; then
+  install_configs
+else
+  install_configs "$@"
+fi
