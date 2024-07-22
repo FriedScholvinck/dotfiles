@@ -1,0 +1,5 @@
+theme = "catpuccin_frappe"
+
+[editor.file-picker]
+hidden = false
+
