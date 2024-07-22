@@ -41,4 +41,5 @@ setup: nvim tmux alacritty starship bashrc bash_profile profile
 # Installs necessary dependencies using Homebrew.
 install:
 	brew install --cask alacritty
-	tmux tpm neovim starship
+	brew install tmux tpm neovim starship
+
