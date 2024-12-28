@@ -9,6 +9,8 @@ export VISUAL='nvim'
 export TERM='xterm-256color'
 export PATH="/opt/homebrew/bin:$PATH"
 export AWS_PROFILE=xomnia
+export PROJECT_ID=xomniachat
+export REGION='europe-west4'
 
 # enable Vi mode
 set -o vi
@@ -22,6 +24,7 @@ alias vim='nvim'
 alias vi='nvim'
 alias fzf='fzf --preview "bat --color=always --style=header,grid --line-range :500 {}"'
 alias k='kubectl'
+alias tf='terraform'
 
 # launch python environments
 alias a="source .venv/bin/activate"

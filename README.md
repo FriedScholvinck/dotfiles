@@ -1,6 +1,10 @@
 # My Dotfiles
 
-This repository contains my personal dotfiles and setup scripts for a productive development environment. It includes configurations for Alacritty, Neovim (with LazyVim), tmux, Starship prompt, and more.
+This repository contains my personal dotfiles and setup scripts for a productive development environment.
+
+I am working on a Mac, and I am using Homebrew to install all the tools.
+
+Currently, my setup consists of configurations for Alacritty, Neovim (with LazyVim), tmux, Starship prompt, and more.
 
 ## Components
 
@@ -10,6 +14,9 @@ This repository contains my personal dotfiles and setup scripts for a productive
 - **Neovim**: Hyperextensible Vim-based text editor
 - **LazyVim**: A Neovim configuration for the lazy
 - **Starship**: Cross-shell prompt
+
+Command line- and dev tools:
+- **Brewfile**: A list of tools to install via Homebrew (`brew bundle --file=Brewfile`)
 
 ## Prerequisites
 
