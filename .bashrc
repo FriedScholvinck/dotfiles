@@ -46,13 +46,6 @@ bind "set completion-ignore-case on"
 eval "$(fzf --bash)"
 eval "$(starship init bash)"
 
-# quick access to repos
-alias chatbot='cd ~/repos/vz/chat_backend_api/'
-alias searchbar='cd ~/repos/vz/searchbar-backend-api/'
-alias genesis='cd ~/repos/vz/vz-chatbot-genesis/'
-alias openweb='cd ~/repos/rag/open-webui/'
-alias dotfiles='cd ~/dotfiles/'
-
 if [ -f ~/.credentials ]; then
   source ~/.credentials
 fi
@@ -64,3 +57,13 @@ fi
 
 # Created by `pipx` on 2024-12-13 12:04:12
 export PATH="$PATH:/Users/friedscholvinck/.local/bin"
+
+# yazi cd into current directory
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
