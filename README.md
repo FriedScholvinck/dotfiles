@@ -17,6 +17,8 @@ Currently, my setup consists of configurations for Alacritty, Neovim (with LazyV
 
 Command line- and dev tools:
 - **Brewfile**: A list of tools to install via Homebrew (`brew bundle --file=Brewfile`)
+- **Nushell**: A modern shell that treats data as structured tables, allowing powerful data manipulation
+- **Yazi**: A blazing-fast terminal file manager written in Rust, with TUI preview support
 
 ## Prerequisites
 
@@ -81,6 +83,12 @@ brew install tmux
 # Starship
 brew install starship
 
+# Nushell
+brew install nushell
+
+# Yazi
+brew install yazi
+
 # Make (usually pre-installed on macOS, but just in case)
 brew install make
 ```
@@ -108,6 +116,15 @@ sudo apt install tmux -y
 
 # Starship
 curl -sS https://starship.rs/install.sh | sh
+
+# Nushell
+# For Ubuntu/Debian, you might need to build from source or use cargo
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install nu
+
+# Yazi
+# For Ubuntu/Debian, you might need to build from source or use cargo
+cargo install yazi-fm
 
 # Make
 sudo apt install make -y
