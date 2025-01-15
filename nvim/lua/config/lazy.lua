@@ -1,22 +1,23 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  -- bootstrap lazy.nvim
-  -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- { import = "lazyvim.plugins.extras.lang.python" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    { import = "lazyvim.plugins.extras.coding.copilot" },
     -- import/override with your plugins
     { import = "plugins" },
   },
@@ -30,7 +31,10 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = { enabled = false }, -- automatically check for plugin updates
+  checker = {
+    enabled = true, -- check for plugin updates periodically
+    notify = false, -- notify on update
+  }, -- automatically check for plugin updates
   performance = {
     rtp = {
       -- disable some rtp plugins
@@ -43,62 +47,7 @@ require("lazy").setup({
         "tohtml",
         "tutor",
         "zipPlugin",
-        "pyright",
       },
     },
   },
 })
-
--- require("lint").linters_by_ft = {
---   python = { "pylint" },
--- }
-
-require("mason").setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-  },
-})
-
--- https://github.com/williamboman/mason-lspconfig.nvim
-require("mason-lspconfig").setup({
-  ensure_installed = { "ruff", "pylsp" },
-})
-
--- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-require("lspconfig").pylsp.setup({
-  settings = {
-    pylsp = {
-      plugins = {
-        black = {
-          enabled = true,
-        },
-        isort = {
-          enabled = true,
-        },
-        -- pylint is only works from a binary but will throw errors for imports
-        pylint = {
-          enabled = false,
-          executable = "pylint",
-        },
-        ruff = {
-          enabled = true,
-        },
-        pyflakes = {
-          enabled = false,
-        },
-        pycodestyle = {
-          enabled = false,
-        },
-        jedi_completion = {
-          fuzzy = true,
-        },
-      },
-    },
-  },
-})
--- https://github.com/neovim/nvim-lspconfig
--- require("lspconfig").jedi_language_server.setup({})

@@ -1,7 +1,6 @@
 # themes from https://github.com/alacritty/alacritty-theme
 import = ["~/.config/alacritty/themes/themes/catppuccin_frappe.toml"]
 
-
 [font]
 size = 14
 

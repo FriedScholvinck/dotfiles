@@ -13,7 +13,7 @@ export PROJECT_ID=xomniachat
 export REGION='europe-west4'
 
 # enable Vi mode
-set -o vi
+# set -o vi
 
 # Aliases
 alias ls='ls --color=auto'
@@ -29,6 +29,7 @@ alias tf='terraform'
 # launch python environments
 alias a="source .venv/bin/activate"
 alias d="deactivate"
+alias c="cursor"
 
 # managing python versions (should replace with uv)
 export PATH="$HOME/.pyenv/bin:$PATH"
@@ -60,10 +61,10 @@ export PATH="$PATH:/Users/friedscholvinck/.local/bin"
 
 # yazi cd into current directory
 function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
 }
