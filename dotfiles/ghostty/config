@@ -1,0 +1,13 @@
+font-family = "JetBrains Mono Nerd Font"
+font-size = 16
+theme = tokyonight-storm
+window-padding-x = 15
+window-padding-y = 15
+window-height = 40
+window-width = 150
+background-opacity = 0.8
+background-blur-radius = 20
+macos-titlebar-style = hidden
+
+# delete entire line with command + backspace
+keybind = super+backspace=text:\x15
